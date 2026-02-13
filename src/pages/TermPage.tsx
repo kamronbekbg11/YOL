@@ -1,4 +1,4 @@
-import { Info, Plus, MoreHorizontal } from 'lucide-react';
+import { Info, Plus } from 'lucide-react';
 import { Line, Doughnut } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
@@ -180,7 +180,7 @@ export default function TermPage() {
                             </tr>
                         </thead>
                         <tbody>
-                            {activities.map((activity, i) => (
+                            {activities.map((activity) => (
                                 <tr key={activity.id}>
                                     <td>▸</td>
                                     <td>

@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Info, Filter, Search, Check, MoreHorizontal } from 'lucide-react';
+import { Info, Filter, Search, Check } from 'lucide-react';
 import { sessions } from '../data/mockData';
 
 export default function SessionsPage() {
     const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
-    const [showPanel, setShowPanel] = useState(true);
+    const [showPanel] = useState(true);
 
     return (
         <div>

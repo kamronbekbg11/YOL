@@ -7,7 +7,7 @@ interface HeaderProps {
 
 export default function Header({ sidebarCollapsed }: HeaderProps) {
     const [timerActive, setTimerActive] = useState(true);
-    const [timerTime, setTimerTime] = useState('00:06');
+    const [timerTime, _setTimerTime] = useState('00:06');
 
     return (
         <header className={`header ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>

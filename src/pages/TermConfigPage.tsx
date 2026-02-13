@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Info, Plus, Trash2 } from 'lucide-react';
+import { Info } from 'lucide-react';
 
 export default function TermConfigPage() {
     return (

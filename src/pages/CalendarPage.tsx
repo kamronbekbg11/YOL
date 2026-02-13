@@ -27,7 +27,7 @@ export default function CalendarPage() {
         labels: cal.dailyData.map((d) => d.day.toString()),
         datasets: allCourses.map((course) => ({
             label: course,
-            data: cal.dailyData.map((d) => d.courses[course] || 0),
+            data: cal.dailyData.map((d) => (d.courses as unknown as Record<string, number>)[course] || 0),
             backgroundColor: courseColors[course] || '#94A3B8',
             borderRadius: 3,
             barPercentage: 0.8,

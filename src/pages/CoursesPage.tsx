@@ -1,4 +1,4 @@
-import { Info, Plus } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { courses, sessions } from '../data/mockData';
 
 export default function CoursesPage() {
