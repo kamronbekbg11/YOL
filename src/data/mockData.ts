@@ -7,7 +7,7 @@ export const courseColors: Record<string, string> = {
   'Meta-Skills': '#EC4899',
   'Spiritualität': '#EF4444',
   'Unterhaltung': '#06B6D4',
-  'Athenify': '#1E40AF',
+  'Yol': '#1E40AF',
 };
 
 // ===== COURSES =====
@@ -22,7 +22,7 @@ export interface Course {
 }
 
 export const courses: Course[] = [
-  { id: '1', name: 'Athenify', color: '#1E40AF', studied: '38h', goal: '52h', progress: 68 },
+  { id: '1', name: 'Yol', color: '#1E40AF', studied: '38h', goal: '52h', progress: 68 },
   { id: '2', name: 'Gesundheit', color: '#10B981', exam: '15.01.25', studied: '160h', goal: '170h', progress: 91 },
   { id: '3', name: 'Kreativität', color: '#8B5CF6', studied: '14h', goal: '52h', progress: 29 },
   { id: '4', name: 'Kultur', color: '#F59E0B', studied: '80h', goal: '100h', progress: 80 },
@@ -174,7 +174,7 @@ export const dataRoomMatrix = {
   coursesMonths: {
     headers: ['Course', 'Jan 24', 'Feb 24', 'Mar 24', 'Apr 24', 'May 24', 'Jun 24', 'Jul 24', 'Aug 24', 'Sep 24', 'Oct 24', 'Total'],
     rows: [
-      { course: 'Athenify', color: '#1E40AF', values: [0, 2, 2, '-', 4, 12, 16, 10, 0, 1, 62] },
+      { course: 'Yol', color: '#1E40AF', values: [0, 2, 2, '-', 4, 12, 16, 10, 0, 1, 62] },
       { course: 'Gesundheit', color: '#10B981', values: [25, 20, 35, 10, 12, 10, 27, 12, 17, 5, 244] },
       { course: 'Kreativität', color: '#8B5CF6', values: [0, 5, 1, 2, 1, 0, 3, 0, '-', '-', 31] },
       { course: 'Kultur', color: '#F59E0B', values: [1, 3, 5, 5, 8, 5, 3, '-', 6, '-', 46] },

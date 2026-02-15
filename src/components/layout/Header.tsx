@@ -34,7 +34,7 @@ export default function Header({ sidebarCollapsed }: HeaderProps) {
                     <div className="timer-badge">
                         <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                             <span style={{ width: '6px', height: '6px', background: 'white', borderRadius: '50%', display: 'inline-block' }} />
-                            Athenify
+                            Yol
                         </span>
                         <span style={{ background: 'rgba(255,255,255,0.2)', padding: '1px 8px', borderRadius: '10px', fontSize: '11px' }}>
                             {timerTime}

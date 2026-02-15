@@ -5,40 +5,39 @@ import {
     Calendar,
     GraduationCap,
     BookOpen,
-    Database,
     Trophy,
     Settings,
-    Wrench,
     LogOut,
     ChevronLeft,
     ChevronRight,
 } from 'lucide-react';
+import { useTranslation } from '../../i18n/LanguageContext';
+import LanguageSwitcher from '../LanguageSwitcher';
 
 interface SidebarProps {
     collapsed: boolean;
     onToggle: () => void;
 }
 
-const navItems = [
-    { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/sessions', label: 'Sessions', icon: ListTodo },
-    { path: '/calendar', label: 'Calendar', icon: Calendar },
-    { path: '/term', label: 'Term', icon: GraduationCap },
-    { path: '/courses', label: 'Courses', icon: BookOpen },
-    { path: '/data-room', label: 'Data Room', icon: Database },
-    { path: '/achievements', label: 'Achievements', icon: Trophy },
-    { path: '/term-config', label: 'Term Config.', icon: Wrench },
-    { path: '/settings', label: 'Settings', icon: Settings },
-];
-
 export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
     const location = useLocation();
+    const t = useTranslation();
+
+    const navItems = [
+        { path: '/dashboard', label: t.sidebar.dashboard, icon: LayoutDashboard },
+        { path: '/sessions', label: t.sidebar.sessions, icon: ListTodo },
+        { path: '/calendar', label: t.sidebar.calendar, icon: Calendar },
+        { path: '/term', label: t.sidebar.term, icon: GraduationCap },
+        { path: '/courses', label: t.sidebar.courses, icon: BookOpen },
+        { path: '/achievements', label: t.sidebar.achievements, icon: Trophy },
+        { path: '/settings', label: t.sidebar.settings, icon: Settings },
+    ];
 
     return (
         <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
             <div className="sidebar-brand">
                 <div className="brand-icon">🦉</div>
-                <span className="brand-name">Athenify</span>
+                <span className="brand-name">Yol</span>
             </div>
 
             <nav className="sidebar-nav">
@@ -64,13 +63,14 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
             </button>
 
             <div className="sidebar-footer">
+                <LanguageSwitcher />
                 <div className="sidebar-user">
                     <div className="sidebar-user-avatar">👤</div>
                     <span className="sidebar-user-info">lukasinfo@googlemail.com</span>
                 </div>
                 <button className="sidebar-logout">
                     <LogOut size={16} />
-                    <span>Log out</span>
+                    <span>{t.sidebar.logout}</span>
                 </button>
             </div>
         </aside>

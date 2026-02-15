@@ -1,19 +1,22 @@
 import { Info } from 'lucide-react';
 import { courses, sessions } from '../data/mockData';
+import { useTranslation } from '../i18n/LanguageContext';
 
 export default function CoursesPage() {
+    const t = useTranslation();
+
     return (
         <div>
             <div className="page-header">
                 <h1 className="page-title">
-                    Courses
+                    {t.coursesPage.title}
                     <Info size={18} className="info-icon" />
                 </h1>
                 <div className="page-stats">
-                    <span className="stat-item">📈 741h/784h (95%) study progress</span>
-                    <span className="stat-item">📚 53h 40m ø course</span>
-                    <span className="stat-item">🎯 43h 36m ø activity</span>
-                    <span className="stat-item">🏁 784h/851h goal (study days/courses)</span>
+                    <span className="stat-item">📈 741h/784h (95%) {t.coursesPage.studyProgress}</span>
+                    <span className="stat-item">📚 53h 40m {t.coursesPage.avgCourse}</span>
+                    <span className="stat-item">🎯 43h 36m {t.coursesPage.avgActivity}</span>
+                    <span className="stat-item">🏁 784h/851h {t.coursesPage.goal}</span>
                 </div>
             </div>
 
@@ -23,7 +26,7 @@ export default function CoursesPage() {
                         <tr>
                             <th style={{ width: '250px' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    Course
+                                    {t.coursesPage.course}
                                     <button
                                         style={{
                                             background: 'none',
@@ -34,11 +37,11 @@ export default function CoursesPage() {
                                             fontWeight: 500,
                                         }}
                                     >
-                                        Create course...
+                                        {t.coursesPage.createCourse}
                                     </button>
                                 </div>
                             </th>
-                            <th>Sessions</th>
+                            <th>{t.coursesPage.sessions}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,7 +55,7 @@ export default function CoursesPage() {
                                             <div>
                                                 <div style={{ fontWeight: 600, fontSize: '13px' }}>{course.name}</div>
                                                 <div style={{ fontSize: '11px', color: '#94A3B8' }}>
-                                                    {course.studied} studied · {course.progress}% of goal
+                                                    {course.studied} {t.coursesPage.studied} · {course.progress}% {t.coursesPage.ofGoal}
                                                 </div>
                                             </div>
                                         </div>
@@ -81,7 +84,7 @@ export default function CoursesPage() {
                                                 ))}
                                             </div>
                                         ) : (
-                                            <span style={{ color: '#94A3B8', fontSize: '12px' }}>No sessions yet</span>
+                                            <span style={{ color: '#94A3B8', fontSize: '12px' }}>{t.coursesPage.noSessions}</span>
                                         )}
                                     </td>
                                 </tr>

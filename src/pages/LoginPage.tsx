@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, ChevronRight } from 'lucide-react';
+import { useTranslation, useLanguage, type Language } from '../i18n/LanguageContext';
 
 export default function LoginPage() {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const t = useTranslation();
+    const { language, setLanguage } = useLanguage();
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
@@ -17,15 +20,28 @@ export default function LoginPage() {
         <div className="login-page">
             <div className="login-left">
                 <div className="login-owl">🦉</div>
-                <div className="login-brand">Athenify</div>
-                <div className="login-tagline">Turn study time into success.</div>
+                <div className="login-brand">Yol</div>
+                <div className="login-tagline">{t.login.tagline}</div>
             </div>
 
             <div className="login-right">
                 <div className="login-card">
+                    {/* Language switcher on login */}
+                    <div className="login-lang-switcher">
+                        {(['uz', 'ru', 'en'] as Language[]).map((lang) => (
+                            <button
+                                key={lang}
+                                className={`lang-btn-mini ${language === lang ? 'active' : ''}`}
+                                onClick={() => setLanguage(lang)}
+                            >
+                                {lang === 'uz' ? '🇺🇿' : lang === 'ru' ? '🇷🇺' : '🇬🇧'} {lang.toUpperCase()}
+                            </button>
+                        ))}
+                    </div>
+
                     <div className="login-cap">🎓</div>
-                    <h2>Log In</h2>
-                    <p className="welcome">Welcome back!</p>
+                    <h2>{t.login.title}</h2>
+                    <p className="welcome">{t.login.welcome}</p>
 
                     <button className="google-btn">
                         <svg width="18" height="18" viewBox="0 0 24 24">
@@ -34,14 +50,14 @@ export default function LoginPage() {
                             <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
                             <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
                         </svg>
-                        Continue with Google
+                        {t.login.google}
                     </button>
 
-                    <div className="divider">OR</div>
+                    <div className="divider">{t.login.or}</div>
 
                     <form onSubmit={handleLogin}>
                         <div className="form-group">
-                            <label>Email</label>
+                            <label>{t.login.email}</label>
                             <input
                                 type="email"
                                 value={email}
@@ -51,7 +67,7 @@ export default function LoginPage() {
                         </div>
 
                         <div className="form-group">
-                            <label>Password</label>
+                            <label>{t.login.password}</label>
                             <div className="password-wrapper">
                                 <input
                                     type={showPassword ? 'text' : 'password'}
@@ -69,23 +85,23 @@ export default function LoginPage() {
                             </div>
                         </div>
 
-                        <a className="forgot-link">Forgot password?</a>
+                        <a className="forgot-link">{t.login.forgot}</a>
 
                         <button type="submit" className="login-btn">
-                            Log In <ChevronRight size={16} />
+                            {t.login.loginBtn} <ChevronRight size={16} />
                         </button>
                     </form>
 
-                    <div className="divider">OR</div>
+                    <div className="divider">{t.login.or}</div>
 
-                    <p style={{ fontSize: '14px', color: '#64748B' }}>Don't have an account?</p>
+                    <p style={{ fontSize: '14px', color: '#64748B' }}>{t.login.noAccount}</p>
                     <a className="create-link" onClick={() => navigate('/dashboard')}>
-                        Create an account <ChevronRight size={14} />
+                        {t.login.createAccount} <ChevronRight size={14} />
                     </a>
 
                     <div className="login-footer">
-                        <strong>Athenify</strong> · The Study Tracking App
-                        <br />© 2025 Athenify
+                        <strong>Yol</strong> · {t.login.footer}
+                        <br />© 2025 Yol
                     </div>
                 </div>
             </div>

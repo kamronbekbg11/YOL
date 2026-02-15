@@ -11,12 +11,25 @@ import {
     Legend,
 } from 'chart.js';
 import { calendarData, courseColors } from '../data/mockData';
+import { useTranslation } from '../i18n/LanguageContext';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export default function CalendarPage() {
-    const [activeView, setActiveView] = useState('Monthly view');
-    const [activeTab, setActiveTab] = useState('Overview');
+    const t = useTranslation();
+    const viewOptions = [
+        { key: 'daily', label: t.calendarPage.dailyView },
+        { key: 'weekly', label: t.calendarPage.weeklyView },
+        { key: 'monthly', label: t.calendarPage.monthlyView },
+    ];
+    const tabOptions = [
+        { key: 'overview', label: t.calendarPage.overview },
+        { key: 'courses', label: t.calendarPage.courses },
+        { key: 'activities', label: t.calendarPage.activities },
+    ];
+
+    const [activeView, setActiveView] = useState('monthly');
+    const [activeTab, setActiveTab] = useState('overview');
     const cal = calendarData;
 
     const allCourses = Array.from(
@@ -64,31 +77,31 @@ export default function CalendarPage() {
         <div>
             <div className="page-header">
                 <h1 className="page-title">
-                    Calendar
+                    {t.calendarPage.title}
                     <Info size={18} className="info-icon" />
                 </h1>
                 <div className="page-stats">
-                    <span className="stat-item">↔ 01.01.24–31.12.24 Term</span>
-                    <span className="stat-item">📈 741h/784h (95%) study progress</span>
-                    <span className="stat-item">⏱️ 278/366 (76%) time progress</span>
-                    <span className="stat-item">🏠 2h 40m ø study day</span>
-                    <span className="stat-item">🏁 784h/851h goal (study days/courses)</span>
+                    <span className="stat-item">↔ 01.01.24–31.12.24 {t.calendarPage.term}</span>
+                    <span className="stat-item">📈 741h/784h (95%) {t.calendarPage.studyProgress}</span>
+                    <span className="stat-item">⏱️ 278/366 (76%) {t.calendarPage.timeProgress}</span>
+                    <span className="stat-item">🏠 2h 40m {t.calendarPage.avgStudyDay}</span>
+                    <span className="stat-item">🏁 784h/851h {t.calendarPage.goal}</span>
                 </div>
             </div>
 
             {/* VIEW TABS */}
             <div className="tabs">
-                {['Daily view', 'Weekly view', 'Monthly view'].map((v) => (
+                {viewOptions.map((v) => (
                     <button
-                        key={v}
-                        className={`tab ${activeView === v ? 'active' : ''}`}
-                        onClick={() => setActiveView(v)}
+                        key={v.key}
+                        className={`tab ${activeView === v.key ? 'active' : ''}`}
+                        onClick={() => setActiveView(v.key)}
                     >
-                        {v}
+                        {v.label}
                     </button>
                 ))}
                 <div style={{ flex: 1 }} />
-                <button className="filter-btn" style={{ margin: '4px 0' }}>🔧 Change goals...</button>
+                <button className="filter-btn" style={{ margin: '4px 0' }}>🔧 {t.calendarPage.changeGoals}</button>
             </div>
 
             <div className="calendar-layout">
@@ -97,8 +110,8 @@ export default function CalendarPage() {
                     {/* Month Selector */}
                     <div className="card">
                         <div className="month-selector">
-                            <span className="month-label">Months · {cal.monthIndex}/{cal.totalMonths}</span>
-                            <button className="current-btn">Select current month</button>
+                            <span className="month-label">{t.calendarPage.months} · {cal.monthIndex}/{cal.totalMonths}</span>
+                            <button className="current-btn">{t.calendarPage.selectCurrent}</button>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                             <span style={{ fontSize: '13px', fontWeight: 600 }}>{cal.month}</span>
@@ -112,32 +125,32 @@ export default function CalendarPage() {
 
                     {/* Sub-tabs */}
                     <div className="tabs" style={{ marginBottom: '0' }}>
-                        {['Overview', 'Courses', 'Activities'].map((t) => (
+                        {tabOptions.map((tab) => (
                             <button
-                                key={t}
-                                className={`tab ${activeTab === t ? 'active' : ''}`}
-                                onClick={() => setActiveTab(t)}
+                                key={tab.key}
+                                className={`tab ${activeTab === tab.key ? 'active' : ''}`}
+                                onClick={() => setActiveTab(tab.key)}
                             >
-                                {t}
+                                {tab.label}
                             </button>
                         ))}
                     </div>
 
                     {/* Goals */}
                     <div className="card">
-                        <div className="card-title" style={{ marginBottom: '12px' }}>Goals</div>
+                        <div className="card-title" style={{ marginBottom: '12px' }}>{t.calendarPage.goals}</div>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', textAlign: 'center' }}>
                             <div>
                                 <div style={{ fontSize: '16px', fontWeight: 700, color: '#10B981' }}>{cal.goals.studied}</div>
-                                <div style={{ fontSize: '10px', color: '#94A3B8' }}>STUDIED</div>
+                                <div style={{ fontSize: '10px', color: '#94A3B8' }}>{t.calendarPage.studied}</div>
                             </div>
                             <div>
                                 <div style={{ fontSize: '16px', fontWeight: 700 }}>{cal.goals.goal}</div>
-                                <div style={{ fontSize: '10px', color: '#94A3B8' }}>GOAL</div>
+                                <div style={{ fontSize: '10px', color: '#94A3B8' }}>{t.calendarPage.goalLabel}</div>
                             </div>
                             <div>
                                 <div style={{ fontSize: '16px', fontWeight: 700 }}>{cal.goals.sessions}</div>
-                                <div style={{ fontSize: '10px', color: '#94A3B8' }}>SESSIONS</div>
+                                <div style={{ fontSize: '10px', color: '#94A3B8' }}>{t.calendarPage.sessionsLabel}</div>
                             </div>
                         </div>
                         <div style={{ marginTop: '8px' }}>
@@ -145,41 +158,41 @@ export default function CalendarPage() {
                                 <div className="progress-bar-fill" style={{ width: `${Math.min(cal.goals.percentage, 100)}%`, background: '#10B981' }} />
                             </div>
                             <div style={{ fontSize: '11px', color: '#94A3B8', marginTop: '4px' }}>
-                                {cal.goals.percentage}% · Study goal achieved
+                                {cal.goals.percentage}% · {t.calendarPage.goalAchieved}
                             </div>
                         </div>
                     </div>
 
                     {/* Insights */}
                     <div className="card">
-                        <div className="card-title" style={{ marginBottom: '12px' }}>Insights</div>
+                        <div className="card-title" style={{ marginBottom: '12px' }}>{t.calendarPage.insights}</div>
                         <div style={{ fontSize: '12.5px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <span style={{ color: '#64748B' }}>🎯 0 Exams</span>
+                                <span style={{ color: '#64748B' }}>🎯 0 {t.calendarPage.exams}</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <span style={{ color: '#64748B' }}>✓ {cal.insights.activeDays} active days ({cal.insights.activeDaysPercent}%)</span>
+                                <span style={{ color: '#64748B' }}>✓ {cal.insights.activeDays} {t.calendarPage.activeDays} ({cal.insights.activeDaysPercent}%)</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <span style={{ color: '#64748B' }}>✓ {cal.insights.daysOver100} days with {'>'} 100% goal ({cal.insights.daysOver100Percent}%)</span>
+                                <span style={{ color: '#64748B' }}>✓ {cal.insights.daysOver100} {t.calendarPage.daysOver100} ({cal.insights.daysOver100Percent}%)</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <span style={{ color: '#3B82F6' }}>⊘ {cal.insights.dailyAvg} ø daily (active days)</span>
+                                <span style={{ color: '#3B82F6' }}>⊘ {cal.insights.dailyAvg} {t.calendarPage.dailyActive}</span>
                                 <span style={{ color: '#10B981', fontSize: '11px' }}>+daily ↑</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <span style={{ color: '#EF4444' }}>⊘ 0h 21m ø daily (all days)</span>
+                                <span style={{ color: '#EF4444' }}>⊘ 0h 21m {t.calendarPage.dailyAll}</span>
                                 <span style={{ color: '#10B981', fontSize: '11px' }}>+daily ↑</span>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <span style={{ color: '#64748B' }}>📈 {cal.insights.deltaSharePrice} delta share price ({cal.insights.deltaPercent})</span>
+                                <span style={{ color: '#64748B' }}>📈 {cal.insights.deltaSharePrice} {t.calendarPage.deltaSharePrice} ({cal.insights.deltaPercent})</span>
                             </div>
                         </div>
                     </div>
 
                     {/* Medals */}
                     <div className="card">
-                        <div className="card-title" style={{ marginBottom: '12px' }}>Medals</div>
+                        <div className="card-title" style={{ marginBottom: '12px' }}>{t.calendarPage.medals}</div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                                 <span style={{ fontSize: '20px' }}>🥇</span>

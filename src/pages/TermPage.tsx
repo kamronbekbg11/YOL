@@ -12,10 +12,13 @@ import {
     Legend,
 } from 'chart.js';
 import { courses, activities, termChartData } from '../data/mockData';
+import { useTranslation } from '../i18n/LanguageContext';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, ArcElement, Title, Tooltip, Legend);
 
 export default function TermPage() {
+    const t = useTranslation();
+
     const lineData = {
         labels: termChartData.labels,
         datasets: termChartData.datasets.map((ds) => ({
@@ -73,14 +76,14 @@ export default function TermPage() {
         <div>
             <div className="page-header">
                 <h1 className="page-title">
-                    Term
+                    {t.termPage.title}
                     <Info size={18} className="info-icon" />
                 </h1>
                 <div className="page-stats">
-                    <span className="stat-item">📈 741h/784h (95%) study progress</span>
-                    <span className="stat-item">📚 53h 40m ø course</span>
-                    <span className="stat-item">🎯 43h 36m ø activity</span>
-                    <span className="stat-item">🏁 784h/851h goal (study days/courses)</span>
+                    <span className="stat-item">📈 741h/784h (95%) {t.termPage.studyProgress}</span>
+                    <span className="stat-item">📚 53h 40m {t.termPage.avgCourse}</span>
+                    <span className="stat-item">🎯 43h 36m {t.termPage.avgActivity}</span>
+                    <span className="stat-item">🏁 784h/851h {t.termPage.goal}</span>
                 </div>
             </div>
 
@@ -88,11 +91,11 @@ export default function TermPage() {
                 {/* COURSES CHART */}
                 <div className="card">
                     <div className="card-header">
-                        <span className="card-title">Courses · {courses.length}</span>
+                        <span className="card-title">{t.termPage.courses} · {courses.length}</span>
                         <div style={{ display: 'flex', gap: '8px' }}>
-                            <button className="filter-btn">📊 Compare goals...</button>
+                            <button className="filter-btn">📊 {t.termPage.compareGoals}</button>
                             <button className="filter-btn" style={{ background: '#3B82F6', color: 'white', borderColor: '#3B82F6' }}>
-                                <Plus size={12} /> Create course...
+                                <Plus size={12} /> {t.termPage.createCourse}
                             </button>
                         </div>
                     </div>
@@ -116,10 +119,10 @@ export default function TermPage() {
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Course</th>
-                                <th>Exam</th>
-                                <th>Studied</th>
-                                <th>Progress</th>
+                                <th>{t.termPage.course}</th>
+                                <th>{t.termPage.exam}</th>
+                                <th>{t.termPage.studied}</th>
+                                <th>{t.termPage.progress}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -157,11 +160,11 @@ export default function TermPage() {
                 {/* ACTIVITIES */}
                 <div className="card">
                     <div className="card-header">
-                        <span className="card-title">Activities · {activities.length}</span>
+                        <span className="card-title">{t.termPage.activities} · {activities.length}</span>
                         <div style={{ display: 'flex', gap: '8px' }}>
-                            <button className="filter-btn">📥 Import...</button>
+                            <button className="filter-btn">📥 {t.termPage.import}</button>
                             <button className="filter-btn" style={{ background: '#3B82F6', color: 'white', borderColor: '#3B82F6' }}>
-                                <Plus size={12} /> Create activity...
+                                <Plus size={12} /> {t.termPage.createActivity}
                             </button>
                         </div>
                     </div>
@@ -174,8 +177,8 @@ export default function TermPage() {
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Activity</th>
-                                <th>▲ Studied</th>
+                                <th>{t.termPage.activity}</th>
+                                <th>▲ {t.termPage.studied}</th>
                                 <th></th>
                             </tr>
                         </thead>
