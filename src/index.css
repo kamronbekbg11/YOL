@@ -1498,20 +1498,431 @@ textarea {
   border-color: var(--accent-blue);
 }
 
+/* ===== MOBILE TOPBAR ===== */
+.mobile-topbar {
+  display: none;
+}
+
+.sidebar-mobile-close {
+  display: none;
+}
+
+.sidebar-overlay {
+  display: none;
+}
+
+/* ===== MOBILE RESPONSIVE (≤768px) ===== */
 @media (max-width: 768px) {
+
+  /* --- Mobile Topbar (hamburger bar) --- */
+  .mobile-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--sidebar-bg);
+    padding: 10px 16px;
+    min-height: 52px;
+  }
+
+  .hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .brand-icon-mini {
+    font-size: 20px;
+  }
+
+  /* --- Sidebar: hidden by default, slide in --- */
   .sidebar {
-    width: var(--sidebar-collapsed-width);
+    width: 260px !important;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 200;
   }
 
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .sidebar.collapsed {
+    width: 260px !important;
+  }
+
+  .sidebar.collapsed .brand-name,
+  .sidebar.collapsed .nav-label,
+  .sidebar.collapsed .sidebar-user-info,
+  .sidebar.collapsed .sidebar-logout span,
+  .sidebar.collapsed .lang-code {
+    display: inline !important;
+  }
+
+  .sidebar.collapsed .lang-switcher {
+    flex-direction: row;
+  }
+
+  .sidebar-collapse-btn {
+    display: none;
+  }
+
+  .sidebar-mobile-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: var(--sidebar-text);
+    cursor: pointer;
+    z-index: 10;
+    padding: 4px;
+    border-radius: 6px;
+    transition: all 0.15s ease;
+  }
+
+  .sidebar-mobile-close:hover {
+    background: var(--sidebar-hover);
+    color: var(--sidebar-text-active);
+  }
+
+  /* --- Overlay --- */
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 150;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  /* --- Main wrapper --- */
   .main-wrapper {
-    margin-left: var(--sidebar-collapsed-width);
+    margin-left: 0 !important;
   }
 
+  .main-content {
+    padding: 16px;
+    margin-top: 0;
+  }
+
+  /* --- Header (hide desktop header on mobile) --- */
   .header {
-    left: var(--sidebar-collapsed-width);
+    display: none;
   }
 
+  /* --- Page Header --- */
+  .page-title {
+    font-size: 22px;
+  }
+
+  .page-stats {
+    gap: 8px;
+    font-size: 11px;
+  }
+
+  .page-stats .stat-item {
+    flex: 0 0 auto;
+  }
+
+  /* --- Stat Cards --- */
   .stat-cards {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+
+  .stat-card-value {
+    font-size: 22px;
+  }
+
+  .stat-card-label {
+    font-size: 10px;
+  }
+
+  /* --- Dashboard Grid --- */
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* --- Tables: horizontal scroll --- */
+  .card:has(.data-table) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .data-table {
+    min-width: 600px;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  /* --- Sessions Layout --- */
+  .sessions-layout {
+    flex-direction: column-reverse !important;
+    gap: 14px;
+  }
+
+  .session-panel {
+    width: 100% !important;
+  }
+
+  .sessions-main {
+    width: 100%;
+  }
+
+  .view-toggle {
+    font-size: 11px;
+  }
+
+  /* --- Filter Bar --- */
+  .filter-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+  }
+
+  .filter-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-size: 11.5px;
+    padding: 5px 10px;
+  }
+
+  .search-input {
+    flex-shrink: 0;
+  }
+
+  /* --- Calendar Layout --- */
+  .calendar-layout {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  .calendar-sidebar {
+    order: 2;
+  }
+
+  .calendar-main {
+    order: 1;
+  }
+
+  .course-legend {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .legend-item {
+    font-size: 11px;
+  }
+
+  .chart-container {
+    height: 250px !important;
+  }
+
+  /* --- Tabs --- */
+  .tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+  }
+
+  .tab {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+
+  /* --- Achievements Grid --- */
+  .achievements-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .achievement-card {
+    padding: 14px;
+  }
+
+  .achievement-icon {
+    font-size: 28px;
+  }
+
+  .achievement-name {
+    font-size: 12px;
+  }
+
+  .achievement-desc {
+    font-size: 10.5px;
+  }
+
+  /* --- Medals --- */
+  .medal-display {
+    gap: 14px;
+  }
+
+  .medal-item {
+    font-size: 16px;
+  }
+
+  .medal-icon {
+    font-size: 22px;
+  }
+
+  /* --- Settings --- */
+  .settings-row {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 6px;
+  }
+
+  /* --- Login Page --- */
+  .login-page {
+    flex-direction: column;
+  }
+
+  .login-left {
+    padding: 30px 20px;
+    min-height: auto;
+    flex: 0 0 auto;
+  }
+
+  .login-owl {
+    font-size: 48px;
+    margin-bottom: 8px;
+  }
+
+  .login-brand {
+    font-size: 28px;
+  }
+
+  .login-tagline {
+    font-size: 14px;
+  }
+
+  .login-right {
+    padding: 20px 16px;
+    flex: 1;
+  }
+
+  .login-card {
+    padding: 24px 20px;
+    max-width: 100%;
+  }
+
+  .login-cap {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  .login-card h2 {
+    font-size: 20px;
+  }
+
+  /* --- Form inside session panel --- */
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* --- Progress bar areas --- */
+  .progress-bar {
+    height: 5px;
+  }
+
+  /* --- Card padding reduction --- */
+  .card {
+    padding: 14px;
+  }
+
+  .card-header {
+    margin-bottom: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .card-title {
+    font-size: 13px;
+  }
+
+  /* --- Streaks --- */
+  .streak-value {
+    font-size: 28px;
+  }
+}
+
+/* ===== EXTRA SMALL (≤480px) ===== */
+@media (max-width: 480px) {
+  .stat-cards {
+    grid-template-columns: 1fr !important;
+    gap: 8px;
+  }
+
+  .achievements-grid {
     grid-template-columns: 1fr;
+  }
+
+  .page-title {
+    font-size: 20px;
+  }
+
+  .page-stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .login-left {
+    padding: 20px 16px;
+  }
+
+  .login-owl {
+    font-size: 36px;
+  }
+
+  .login-brand {
+    font-size: 24px;
+  }
+
+  .login-lang-switcher {
+    flex-wrap: wrap;
   }
 }

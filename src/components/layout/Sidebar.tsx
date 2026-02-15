@@ -10,6 +10,7 @@ import {
     LogOut,
     ChevronLeft,
     ChevronRight,
+    X,
 } from 'lucide-react';
 import { useTranslation } from '../../i18n/LanguageContext';
 import LanguageSwitcher from '../LanguageSwitcher';
@@ -17,9 +18,11 @@ import LanguageSwitcher from '../LanguageSwitcher';
 interface SidebarProps {
     collapsed: boolean;
     onToggle: () => void;
+    mobileOpen?: boolean;
+    onMobileClose?: () => void;
 }
 
-export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
+export default function Sidebar({ collapsed, onToggle, mobileOpen, onMobileClose }: SidebarProps) {
     const location = useLocation();
     const t = useTranslation();
 
@@ -34,9 +37,14 @@ export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
     ];
 
     return (
-        <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+        <aside className={`sidebar ${collapsed ? 'collapsed' : ''} ${mobileOpen ? 'mobile-open' : ''}`}>
+            {/* Mobile close button */}
+            <button className="sidebar-mobile-close" onClick={onMobileClose}>
+                <X size={20} />
+            </button>
+
             <div className="sidebar-brand">
-                <div className="brand-icon">🦉</div>
+                <div className="brand-icon"><img src="/logo.svg" alt="Yol" className="brand-logo" /></div>
                 <span className="brand-name">Yol</span>
             </div>
 

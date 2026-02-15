@@ -19,7 +19,7 @@ export default function LoginPage() {
     return (
         <div className="login-page">
             <div className="login-left">
-                <div className="login-owl">🦉</div>
+                <div className="login-owl"><img src="/logo.svg" alt="Yol" className="login-logo-img" /></div>
                 <div className="login-brand">Yol</div>
                 <div className="login-tagline">{t.login.tagline}</div>
             </div>
